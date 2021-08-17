@@ -1,12 +1,22 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from './views/Login.vue'
+//引入Home组件
 import Home from './views/Home.vue'
-import Test1 from './views/Test1.vue'
-import Test2 from './views/Test2.vue'
 
+
+
+//官网给的示例
+//import Vue from 'vue'
+//import VueRouter from 'vue-router'
+//Vue.use(VueRouter)
+
+
+//安装路由功能，松哥说的好像VueRouter和Router作用差不多
 Vue.use(Router)
 
+
+//创建 router 对象，然后传 `routes` 配置
 export default new Router({
   routes:[
     {
@@ -19,21 +29,6 @@ export default new Router({
       name:'Home',
       component:Home,
       hidden:true
-    },{
-      path:'/home',
-      name:'导航一',
-      component:Home,
-      children:[
-        {
-          path:'/test1',
-          name:'选项1',
-          component:Test1
-        },{
-          path:'/test2',
-          name:'选项2',
-          component:Test2
-        }
-      ]
     }
   ]
 })

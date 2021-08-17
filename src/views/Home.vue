@@ -28,7 +28,16 @@
           </el-menu>
         </el-aside>
         <el-main>
-          <router-view/>
+          <!--Breadcrumb 面包屑制作导航栏-->
+          <el-breadcrumb separator-class="el-icon-arrow-right" v-if="this.$router.currentRoute.path!='/home'">
+            <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item>{{this.$router.currentRoute.name}}</el-breadcrumb-item>
+          </el-breadcrumb>
+          <!--v-if="this.$router.currentRoute.path='/home'"使得只在首页显示欢迎来到微人事!-->
+          <div class="homeWelcome" v-if="this.$router.currentRoute.path=='/home'">
+            欢迎来到微人事!
+          </div>
+          <router-view class="homeRouterView"/>
         </el-main>
       </el-container>
     </el-container>
@@ -76,6 +85,17 @@ export default {
 </script>
 
 <style>
+/*有些样式在Home页里面整体来改,不要在单个组件上改*/
+.homeRouterView{
+  margin-top: 10px;
+}
+.homeWelcome{
+  text-align: center;
+  font-size: 30px;
+  font-family: 华文行楷;
+  color:#1573d2;
+  padding-top:50px;
+}
 .homeHeader{
     background:#1573d2;
     display:flex;
