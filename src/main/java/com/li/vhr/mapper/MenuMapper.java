@@ -1,9 +1,11 @@
 package com.li.vhr.mapper;
 
 import com.li.vhr.model.Menu;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface MenuMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -18,4 +20,7 @@ public interface MenuMapper {
     int updateByPrimaryKey(Menu record);
 
     List<Menu> getMenusByHrId(Integer hrid);
+
+    List<Menu> getAllMenusWithRole();
+    
 }

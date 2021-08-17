@@ -1,4 +1,4 @@
-package com.li.vhr.controller;
+package com.li.vhr.controller.config;
 
 import com.li.vhr.model.Menu;
 import com.li.vhr.service.MenuService;
