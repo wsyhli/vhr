@@ -25,7 +25,7 @@ export default {
   name: "SysBasic",
   data(){
     return{
-      activeName:'joblevelmana'
+      activeName:'permissmana'
     }
   },
 //  组件引入后需要注册,如果组件的key和value一样,那么可以简写成一个

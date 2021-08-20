@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "DepMana"
+  name: "EcMana"
 }
 </script>
 

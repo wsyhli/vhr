@@ -28,7 +28,8 @@ Vue.prototype.getRequest=getRequest;
 Vue.config.productionTip = false
 
 //通过全局方法 Vue.use() 使用插件
-Vue.use(ElementUI);
+//通过在main.js中设置{size:'small'},具有全局配置的意思,可以使得其他地方的组件中不在设置{size:'small'}
+Vue.use(ElementUI,{size:'small'});
 
 //前置导航守卫
 router.beforeEach((to,from,next)=>{
