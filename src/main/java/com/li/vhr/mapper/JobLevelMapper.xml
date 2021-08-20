@@ -12,10 +12,16 @@
     id, name, titleLevel, createDate, enabled
   </sql>
 
+  <delete id="deleteJobLevelsByIds">
+    delete from joblevel where id in
+      <foreach collection="ids" item="id" close=")" open="(" separator=",">
+        #{id}
+      </foreach>
+  </delete>
+
   <select id="getAllJobLevels" resultMap="BaseResultMap">
     select * from joblevel;
   </select>
-
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
