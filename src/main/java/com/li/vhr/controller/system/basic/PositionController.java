@@ -30,7 +30,6 @@ public class PositionController {
             return RespBean.ok("添加成功");
         }
         return RespBean.error("添加失败");
-
     }
 
     //更新接口
@@ -60,7 +59,5 @@ public class PositionController {
         }
         return RespBean.error("删除失败");
     }
-
-
 
 }

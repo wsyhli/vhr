@@ -1,9 +1,9 @@
 package com.li.vhr.model;
 
 public class RespBean {
-    private Integer status;
-    private String msg;
-    private Object obj;
+    public Integer status;
+    public String msg;
+    public Object obj;
 
     public static RespBean ok(String msg){
         return new RespBean(200,msg,null);
@@ -20,8 +20,6 @@ public class RespBean {
     public static RespBean error(String msg,Object obj){
         return new RespBean(500,msg,obj);
     }
-
-
 
     private RespBean(Integer status, String msg, Object obj) {
         this.status = status;

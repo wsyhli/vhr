@@ -9,6 +9,7 @@ import java.util.List;
 
 @Repository
 public interface PositionMapper {
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(Position record);
