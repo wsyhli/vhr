@@ -43,6 +43,7 @@
       <el-table-column
           label="是否启用">
         <template slot-scope="scope">
+          <!--scope相当于一行的数据，scope.row相当于当前行的数据对象。-->
           <el-tag size="small" type="success" v-if="scope.row.enabled">已启用</el-tag>
           <el-tag size="small" type="danger" v-else>未启用</el-tag>
         </template>
@@ -181,6 +182,7 @@ export default {
     },
     addPosition(){
       if(this.pos.name){
+        //then中的resp可以理解为保存着前半条语句执行的结果
         this.postRequest("/system/basic/pos/",this.pos).then(resp=>{
           if(resp){
             //刷新表格

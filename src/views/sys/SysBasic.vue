@@ -19,13 +19,11 @@
   import PermissMana from "../../components/sys/basic/PermissMana";
   import PosMana from "../../components/sys/basic/PosMana";
 
-
-
 export default {
   name: "SysBasic",
   data(){
     return{
-      activeName:'permissmana'
+      activeName:'posmana'
     }
   },
 //  组件引入后需要注册,如果组件的key和value一样,那么可以简写成一个

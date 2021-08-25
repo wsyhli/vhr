@@ -2,6 +2,7 @@
 import axios from "axios";
 //引入ElementUI中的Message组件来展示错误信息
 import { Message } from 'element-ui';
+import router from '../router';
 
 //定义一个响应拦截器
 //箭头函数中的success表示服务端处理成功的响应
@@ -24,6 +25,7 @@ axios.interceptors.response.use(success=>{
         Message.error({message:'权限不足，请联系管理员'})
     }else if(error.response.status==401){
         Message.error({message:'尚未登录，请登录'})
+        router.replace('/');
     }else{
         if(error.response.data.msg){
             Message.error({message:error.response.data.msg})
@@ -72,6 +74,7 @@ export const putRequest=(url,params)=>{
         data:params
     })
 }
+//函数表达式是一个常量，存储在常量getRequest中，getRequest可以当作一个函数来用
 export const getRequest=(url,params)=>{
     return axios({
         method:'get',

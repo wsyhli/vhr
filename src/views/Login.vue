@@ -4,14 +4,14 @@
   <el-form :rules="rules" ref="loginForm" :model="loginForm" class="loginContainer">
     <h3 class="systemLogin">系统登录</h3>
     <el-form-item prop="username">
-      <el-input type="text" v-model="loginForm.username" auto-complete="off" placeholder="请输入用户名"></el-input>
+      <el-input size="normal" type="text" v-model="loginForm.username" auto-complete="off" placeholder="请输入用户名"></el-input>
     </el-form-item>
     <el-form-item prop="password">
       <!--@keydown.enter.native="submitLogin使得当光标停在密码输入框内的时候,可以按回车进行登录-->
-      <el-input type="password" v-model="loginForm.password" auto-complete="off" placeholder="请输入密码" @keydown.enter.native="submitLogin"></el-input>
+      <el-input size="normal" type="password" v-model="loginForm.password" auto-complete="off" placeholder="请输入密码" @keydown.enter.native="submitLogin"></el-input>
     </el-form-item>
-    <el-checkbox class="loginRemember" v-model="checked"></el-checkbox>
-    <el-button type="success" style="width:100%" @click="submitLogin">登录</el-button>
+    <el-checkbox size="normal" class="loginRemember" v-model="checked"></el-checkbox>
+    <el-button size="normal" type="success" style="width:100%" @click="submitLogin">登录</el-button>
   </el-form>
 </div>
 </template>
