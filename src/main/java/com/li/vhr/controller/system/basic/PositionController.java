@@ -21,6 +21,7 @@ public class PositionController {
         return positionService.getAllPositions();
     }
 
+
     //添加角色接口
     @PostMapping("/")
     //@RequestBody会把前端传过来的数据反序列化为一个对象(来自官方文档)
@@ -32,6 +33,7 @@ public class PositionController {
         return RespBean.error("添加失败");
     }
 
+
     //更新接口
     @PutMapping("/")
     public RespBean updatePositions(@RequestBody Position position){
@@ -40,6 +42,7 @@ public class PositionController {
         }
         return RespBean.error("更新失败");
     }
+
 
     //删除接口
     //请求地址中的参数会被传递到id这个变量上去

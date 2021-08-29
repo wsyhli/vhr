@@ -1,30 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.li.vhr.mapper.PositionMapper" >
+
+  <!--自定义结果映射-->
+  <!--id作为唯一标识符，名字可以任取，最好见名知意来取;type后面写类的全限定类名或者别名-->
   <resultMap id="BaseResultMap" type="com.li.vhr.model.Position" >
+    <!--id用来描述主键;column是数据库查询出来的列名;property属性可以修改列名;jdbcType:指定列名的属性-->
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="createDate" property="createDate" jdbcType="TIMESTAMP" />
     <result column="enabled" property="enabled" jdbcType="BIT" />
   </resultMap>
+
+  <!--sql查询过程中，使用select*会降低查询效率，可以用如下的sql片段解决-->
   <sql id="Base_Column_List" >
     id, name, createDate, enabled
   </sql>
 
+  <!--使用自定义的resultMap结果集映射-->
   <select id="getAllPositions" resultMap="BaseResultMap">
     select * from position;
   </select>
 
+  <!--<include refid="Base_Column_List" />引用上面写的sql片段，代替*，用于提高查询效率-->
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from position
     where id = #{id,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from position
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.li.vhr.model.Position" >
     insert into position (id, name, createDate, 
       enabled)
