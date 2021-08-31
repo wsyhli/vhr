@@ -1,7 +1,14 @@
 <template>
 <div>
   <!--:model等价于v-bind:model-->
-  <el-form :rules="rules" ref="loginForm" :model="loginForm" class="loginContainer">
+  <el-form :rules="rules"
+           ref="loginForm"
+           v-loading="loading"
+           element-loading-text="正在登录...."
+           element-loading-spinner="el-icon-loading"
+           element-loading-background="rgba(0, 0, 0, 0.8)"
+           :model="loginForm"
+           class="loginContainer">
     <h3 class="systemLogin">系统登录</h3>
     <el-form-item prop="username">
       <el-input size="normal" type="text" v-model="loginForm.username" auto-complete="off" placeholder="请输入用户名"></el-input>
@@ -25,6 +32,7 @@ export default {
   name: "Login",
   data(){
    return{
+     loading:false,
      loginForm:{
        username:'admin',
        password:'123'
@@ -38,11 +46,14 @@ export default {
   },
   methods:{
     submitLogin(){
+
       //=>箭头函数(可以看廖雪峰的官网)
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
+          this.loading=true;
           //在main.js中导入制作好的插件后，以后在vue文件中，直接通过this就可以获取到网络请求方法的引用了
           this.postKeyValueRequest('/doLogin',this.loginForm).then(resp=>{
+            this.loading=false;
             if(resp){
               //前端存储数据的地方:sessionStorage,localStorage,vuex
               //保存数据到sessionStorage

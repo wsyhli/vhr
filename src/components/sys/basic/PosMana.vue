@@ -5,6 +5,10 @@
     <el-input
         size="small"
         class="addPosInput"
+        v-loading="loading"
+        element-loading-text="正在加载...."
+        element-loading-spinner="el-icon-loading"
+        element-loading-background="rgba(0, 0, 0, 0.8)"
         placeholder="添加职位..."
         prefix-icon="el-icon-circle-plus-outline"
         @keydown.enter.native="addPosition"
@@ -96,6 +100,7 @@ export default {
   name: "PosMana",
   data(){
     return{
+      loading:false,
       pos:{
         name:''
       },
@@ -142,7 +147,9 @@ export default {
       // console.log(val);
     },
     initPositions(){
+      this.loading=true;
       this.getRequest("/system/basic/pos/").then(resp=>{
+        this.loading=false;
         if(resp){
           this.positions=resp;
         }

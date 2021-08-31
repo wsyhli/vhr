@@ -1,5 +1,10 @@
 <template>
-<div>
+<div
+    v-loading="globalLoading"
+    element-loading-text="正在添加...."
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(0, 0, 0, 0.8)"
+>
   <div class="permissManaTool">
     <el-input size="small" placeholder="请输入角色英文名" v-model="role.name">
       <template slot="prepend">ROLE_</template>
@@ -8,7 +13,13 @@
     <el-button type="primary" size="small" icon="el-icon-plus" @click="doAddRole">添加角色</el-button>
   </div>
   <div class="permissManaMain">
-    <el-collapse v-model="activeName" accordion @change="change">
+    <el-collapse v-model="activeName"
+                 v-loading="loading"
+                 element-loading-text="正在加载...."
+                 element-loading-spinner="el-icon-loading"
+                 element-loading-background="rgba(0, 0, 0, 0.8)"
+                 accordion
+                 @change="change">
       <el-collapse-item :title="r.nameZh" :name="r.id" v-for="(r,index) in roles" :key="index">
         <el-card class="box-card">
           <div slot="header" class="clearfix">
@@ -40,6 +51,8 @@ export default {
   name: "PermissMana",
   data(){
     return{
+      globalLoading:false,
+      loading:false,
       role:{
         name:'',
         nameZh:''
@@ -79,7 +92,9 @@ export default {
     },
     doAddRole(){
       if(this.role.name&&this.role.nameZh){
+        this.globalLoading = true;
         this.postRequest("/system/basic/permiss/role",this.role).then(resp=>{
+          this.globalLoading = false;
           if(resp){
             this.role.name='';
             this.role.nameZh='';
@@ -129,7 +144,9 @@ export default {
       })
     },
     initRoles(){
+      this.loading = true;
       this.getRequest("/system/basic/permiss/").then(resp=>{
+        this.loading = false;
         if(resp){
           this.roles=resp;
         }
