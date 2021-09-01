@@ -5,6 +5,10 @@ public class RespBean {
     public String msg;
     public Object obj;
 
+    public static RespBean build(){
+        return new RespBean();
+    }
+
     public static RespBean ok(String msg){
         return new RespBean(200,msg,null);
     }
@@ -34,23 +38,26 @@ public class RespBean {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public RespBean setStatus(Integer status) {
         this.status = status;
+        return this;
     }
 
     public String getMsg() {
         return msg;
     }
 
-    public void setMsg(String msg) {
+    public RespBean setMsg(String msg) {
         this.msg = msg;
+        return this;
     }
 
     public Object getObj() {
         return obj;
     }
 
-    public void setObj(Object obj) {
+    public RespBean setObj(Object obj) {
         this.obj = obj;
+        return this;
     }
 }

@@ -62,17 +62,27 @@
     beginContract, endContract, workAge
   </sql>
 
+  <select id="maxWorkID" resultType="java.lang.Integer">
+    select max(workID) from employee
+  </select>
+
 
   <select id="getEmployeeByPage" resultMap="AllEmployeeInfo">
     SELECT e.*,p.`id` AS pid,p.`name` AS pname,n.`id` AS nid,n.`name` AS nname,d.`id` AS did,d.`name` AS dname,j.`id` AS jid,j.`name` AS jname,pos.`id` AS posid,pos.`name` AS posname FROM
     employee e,nation n,politicsstatus p,department d,joblevel j,POSITION pos WHERE e.`nationId`=n.`id`  AND e.`politicId`=p.`id` AND e.`departmentId`=d.`id`
-    AND e.`jobLevelId`=j.`id` AND e.`posId`=pos.`id` limit #{page},#{size}
+    AND e.`jobLevelId`=j.`id` AND e.`posId`=pos.`id`
+    <if test="keyword!=null and keyword!=''">
+      and e.name like concat('%',#{keyword},'%')
+    </if>
+    limit #{page},#{size}
   </select>
 
   <select id="getTotal" resultType="java.lang.Long">
-    select count(*) from employee;
+    select count(*) from employee
+    <if test="keyword!=null and keyword!=''">
+      where name like concat('%',#{keyword},'%')
+    </if>
   </select>
-
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 

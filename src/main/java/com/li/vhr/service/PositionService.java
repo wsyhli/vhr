@@ -15,7 +15,6 @@ public class PositionService {
     @Autowired
     PositionMapper positionMapper;
 
-
     public List<Position> getAllPositions() {
         return positionMapper.getAllPositions();
     }
@@ -30,11 +29,9 @@ public class PositionService {
         return positionMapper.updateByPrimaryKeySelective(position);
     }
 
-
     public Integer deletePositionById(Integer id) {
         return positionMapper.deleteByPrimaryKey(id);
     }
-
 
     public Integer deletePositionsByIds(Integer[] ids) {
         return positionMapper.deletePositionsByIds(ids);

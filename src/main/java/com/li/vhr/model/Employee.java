@@ -53,7 +53,7 @@ public class Employee {
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
     private Date conversionTime;
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
-    private Date notworkDate;
+    private Date notWorkDate;
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
     private Date beginContract;
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
@@ -298,12 +298,12 @@ public class Employee {
         this.conversionTime = conversionTime;
     }
 
-    public Date getNotworkDate() {
-        return notworkDate;
+    public Date getNotWorkDate() {
+        return notWorkDate;
     }
 
-    public void setNotworkDate(Date notworkDate) {
-        this.notworkDate = notworkDate;
+    public void setNotWorkDate(Date notWorkDate) {
+        this.notWorkDate = notWorkDate;
     }
 
     public Date getBeginContract() {
