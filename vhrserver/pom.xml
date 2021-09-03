@@ -12,10 +12,9 @@
     <artifactId>vhrserver</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>vhr-commons</module>
         <module>vhr-mapper</module>
         <module>vhr-model</module>
-        <module>vh-service</module>
+        <module>vhr-service</module>
     </modules>
 
     <properties>
