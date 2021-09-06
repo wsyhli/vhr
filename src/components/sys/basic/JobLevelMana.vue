@@ -153,6 +153,7 @@ export default {
         type: 'warning'
       }).then(() => {
         let ids ='?';
+        //js中的forEach方法对multipleSelection数组中的每一个元素执行一次循环
         this.multipleSelection.forEach(item=>{
           ids += 'ids=' + item.id + '&';
         })
