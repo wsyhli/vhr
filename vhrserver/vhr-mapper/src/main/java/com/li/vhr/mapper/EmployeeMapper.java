@@ -28,4 +28,7 @@ public interface EmployeeMapper {
 
     Integer addEmps(@Param("list") List<Employee> list);
 
+    Employee getEmployeeById(Integer id);
+
+
 }

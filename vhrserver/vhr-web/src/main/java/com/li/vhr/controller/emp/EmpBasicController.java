@@ -42,7 +42,6 @@ public class EmpBasicController {
         //System.out.println(employee);
         //System.out.println(Arrays.toString(beginDateScope));
         return employeeService.getEmployeeByPage(page,size,employee,beginDateScope);
-
     }
 
     @PostMapping("/")

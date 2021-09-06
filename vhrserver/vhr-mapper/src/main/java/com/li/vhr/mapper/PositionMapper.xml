@@ -5,7 +5,7 @@
   <!--自定义结果映射-->
   <!--id作为唯一标识符，名字可以任取，最好见名知意来取;type后面写类的全限定类名或者别名-->
   <resultMap id="BaseResultMap" type="com.li.vhr.model.Position" >
-    <!--id用来描述主键;column是数据库查询出来的列名;property属性可以修改列名;jdbcType:指定列名的属性-->
+    <!--id用来描述主键;column是数据库查询出来的列名;property是对象中的属性;jdbcType:指定数据库中列的类型-->
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="createDate" property="createDate" jdbcType="TIMESTAMP" />
@@ -41,6 +41,10 @@
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
       #{enabled,jdbcType=BIT})
   </insert>
+
+  <!--动态SQL之if-->
+  <!--suffixOverrides=","中的逗号会被移除，用suffix=")"中的)来替换-->
+  <!--如果只插入了id，那么会变成insert into position (id,此时trim会删除逗号用)来替换逗号-->
   <insert id="insertSelective" parameterType="com.li.vhr.model.Position" >
     insert into position
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -72,6 +76,8 @@
       </if>
     </trim>
   </insert>
+
+    <!--类比foreach循环理解-->
     <delete id="deletePositionsByIds">
       delete from position where id in
         <foreach collection="ids" item="id" separator="," open="(" close=")">
@@ -79,6 +85,7 @@
         </foreach>
     </delete>
 
+  <!--set元素会动态的在首行添加Set关键字，并且会删除多余的逗号-->
   <update id="updateByPrimaryKeySelective" parameterType="com.li.vhr.model.Position" >
     update position
     <set >
@@ -94,6 +101,8 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
   <update id="updateByPrimaryKey" parameterType="com.li.vhr.model.Position" >
     update position
     set name = #{name,jdbcType=VARCHAR},
@@ -101,4 +110,6 @@
       enabled = #{enabled,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
 </mapper>

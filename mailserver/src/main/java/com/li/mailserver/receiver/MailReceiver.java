@@ -11,7 +11,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.util.Date;
@@ -28,16 +27,18 @@ public class MailReceiver {
     @Autowired
     TemplateEngine templateEngine;
 
-    @RabbitListener(queues="javaboy.mail")
+    @RabbitListener(queues="javaboy.mail.welcome")
     public void handler(Employee employee){
+        logger.info(employee.toString());
         MimeMessage msg = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(msg);
         try {
             helper.setTo(employee.getEmail());
-            helper.setFrom(mailProperties.getPassword());
+            helper.setFrom(mailProperties.getUsername());
             helper.setSubject("入职欢迎");
             helper.setSentDate(new Date());
             Context context = new Context();
+
             context.setVariable("name",employee.getName());
             context.setVariable("posName",employee.getPosition().getName());
             context.setVariable("joblevelName",employee.getDepartment().getName());
@@ -50,9 +51,5 @@ public class MailReceiver {
             logger.error("邮件发送失败:"+e.getMessage());
         }
     }
-
-
-
-
 
 }

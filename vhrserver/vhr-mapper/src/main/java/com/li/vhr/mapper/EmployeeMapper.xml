@@ -31,6 +31,7 @@
     <result column="endContract" property="endContract" jdbcType="DATE" />
     <result column="workAge" property="workAge" jdbcType="INTEGER" />
   </resultMap>
+
   <resultMap id="AllEmployeeInfo" type="com.li.vhr.model.Employee" extends="BaseResultMap">
     <association property="nation" javaType="com.li.vhr.model.Nation">
       <id column="nid" property="id"/>
@@ -54,7 +55,6 @@
     </association>
   </resultMap>
 
-
   <sql id="Base_Column_List" >
     id, name, gender, birthday, idCard, wedlock, nationId, nativePlace, politicId, email, 
     phone, address, departmentId, jobLevelId, posId, engageForm, tiptopDegree, specialty, 
@@ -66,6 +66,12 @@
     select max(workID) from employee
   </select>
 
+  <select id="getEmployeeById" resultMap="AllEmployeeInfo">
+    SELECT e.*,p.`id` AS pid,p.`name` AS pname,n.`id` AS nid,n.`name` AS nname,d.`id` AS did,d.`name` AS dname,j.`id`
+      AS jid,j.`name` AS jname,pos.`id` AS posid,pos.`name` AS posname FROM employee e,nation n,politicsstatus
+      p,department d,joblevel j,POSITION pos WHERE e.`nationId`=n.`id`  AND e.`politicId`=p.`id` AND
+      e.`departmentId`=d.`id` AND e.`jobLevelId`=j.`id` AND e.`posId`=pos.`id` and e.`id`=#{id}
+  </select>
 
   <select id="getEmployeeByPage" resultMap="AllEmployeeInfo">
     SELECT e.*,p.`id` AS pid,p.`name` AS pname,n.`id` AS nid,n.`name` AS nname,d.`id` AS did,d.`name` AS dname,j.`id` AS jid,j.`name` AS jname,pos.`id` AS posid,pos.`name` AS posname FROM
@@ -188,7 +194,8 @@
       #{beginContract,jdbcType=DATE}, #{endContract,jdbcType=DATE}, #{workAge,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.li.vhr.model.Employee" >
+
+  <insert id="insertSelective" parameterType="com.li.vhr.model.Employee" useGeneratedKeys="true" keyProperty="id">
     insert into employee
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

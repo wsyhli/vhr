@@ -2,6 +2,8 @@ package com.li.vhr.mapper;
 
 import com.li.vhr.model.Salary;
 
+import java.util.List;
+
 public interface SalaryMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface SalaryMapper {
     int updateByPrimaryKeySelective(Salary record);
 
     int updateByPrimaryKey(Salary record);
+
+    List<Salary> getAllSalaries();
 }
