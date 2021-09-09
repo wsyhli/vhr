@@ -29,7 +29,10 @@ public class EmployeeService {
     SimpleDateFormat monthFormat=new SimpleDateFormat("MM");
     DecimalFormat decimalFormat = new DecimalFormat("##.00");
 
-
+    /*
+    (Integer page, Integer size, Employee employee,Date[] beginDateScope)中的Employee employee,Date[]
+    beginDateScope用于107集的员工高级搜索
+     */
     public RespPageBean getEmployeeByPage(Integer page, Integer size, Employee employee,Date[] beginDateScope) {
         if(page!=null&&size!=null){
             page=(page-1)*size;
@@ -40,10 +43,7 @@ public class EmployeeService {
         bean.setData(data);
         bean.setTotal(total);
         return bean;
-
     }
-
-
 
     public Integer addEmp(Employee employee) {
         Date beginContract = employee.getBeginContract();
@@ -56,7 +56,6 @@ public class EmployeeService {
             logger.info(emp.toString());
             rabbitTemplate.convertAndSend("javaboy.mail.welcome",emp);
         }
-
         return result;
     }
 
@@ -74,5 +73,16 @@ public class EmployeeService {
 
     public Integer addEmps(List<Employee> list) {
         return employeeMapper.addEmps(list);
+    }
+
+    public RespPageBean getEmployeeByPageWithSalary(Integer page, Integer size) {
+        if(page!=null&&size!=null){
+            page=(page-1)*size;
+        }
+        List<Employee> list = employeeMapper.getEmployeeByPageWithSalary(page,size);
+        RespPageBean respPageBean = new RespPageBean();
+        respPageBean.setData(list);
+        respPageBean.setTotal(employeeMapper.getTotal(null,null));
+        return respPageBean;
     }
 }

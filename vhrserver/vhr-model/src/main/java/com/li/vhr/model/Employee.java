@@ -67,6 +67,17 @@ public class Employee implements Serializable {
     private JobLevel jobLevel;
     private Position position;
 
+    public Salary salary;
+
+    public Salary getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Salary salary) {
+        this.salary = salary;
+    }
+
+
     @Override
     public String toString() {
         return "Employee{" +

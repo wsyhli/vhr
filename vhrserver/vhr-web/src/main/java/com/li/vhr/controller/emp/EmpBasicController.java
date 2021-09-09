@@ -35,8 +35,9 @@ public class EmpBasicController {
 
     @Autowired
     DepartmentService departmentService;
-    //第一页查询10个数据
+
     @GetMapping("/")
+    //如果前端没有传page和size过来，后端通过@RequestParam注解给一个默认的值(默认查询第一页，第一页查询10个)
     public RespPageBean getEmployeeByPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue =
             "10") Integer size, Employee employee, Date[] beginDateScope){
         //System.out.println(employee);
