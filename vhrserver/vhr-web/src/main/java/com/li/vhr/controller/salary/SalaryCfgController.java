@@ -1,15 +1,13 @@
 package com.li.vhr.controller.salary;
 
 import com.li.vhr.model.Employee;
+import com.li.vhr.model.RespBean;
 import com.li.vhr.model.RespPageBean;
 import com.li.vhr.model.Salary;
 import com.li.vhr.service.EmployeeService;
 import com.li.vhr.service.SalaryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,13 +32,13 @@ public class SalaryCfgController {
         return employeeService.getEmployeeByPageWithSalary(page,size);
     }
 
-
-
-
-
-
-
-
-
+    @PutMapping("/")
+    public RespBean updateEmployeeSalaryById(Integer eid, Integer sid) {
+        Integer result = employeeService.updateEmployeeSalaryById(eid, sid);
+        if (result == 1 || result == 2) {
+            return RespBean.ok("更新成功");
+        }
+        return RespBean.error("更新失败");
+    }
 
 }
