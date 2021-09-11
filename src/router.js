@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Login from './views/Login.vue'
 //引入Home组件
 import Home from './views/Home.vue'
+import FriendChat from './views/chat/FriendChat.vue'
 
 
 
@@ -28,7 +29,16 @@ export default new Router({
       path:'/home',
       name:'Home',
       component:Home,
-      hidden:true
-    }
+      hidden:true,
+      children:[
+        {
+          path: '/chat',
+          name: '在线聊天',
+          component: FriendChat,
+          hidden:true
+        }
+      ]
+    },
+
   ]
 })
