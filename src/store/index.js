@@ -2,9 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { Notification } from 'element-ui';
 import {getRequest} from "../utils/api";
-import '../utils/stomp'
-import '../utils/sockjs'
-
+import SockJS from  'sockjs-client';
+import  Stomp from 'stompjs';
 Vue.use(Vuex)
 
 const now = new Date();
@@ -55,10 +54,14 @@ const store = new Vuex.Store({
         }
     },
     actions: {
+        //connect方法里面做websocket连接
         connect(context) {
             context.state.stomp = Stomp.over(new SockJS('/ws/ep'));
+            //success是连接成功的回调
             context.state.stomp.connect({}, success => {
+                //订阅消息
                 context.state.stomp.subscribe('/user/queue/chat', msg => {
+                    console.log('xiaoli=========='+msg.body);
                     let receiveMsg = JSON.parse(msg.body);
                     if (!context.state.currentSession || receiveMsg.from != context.state.currentSession.username) {
                         Notification.info({
@@ -72,6 +75,7 @@ const store = new Vuex.Store({
                     receiveMsg.to = receiveMsg.from;
                     context.commit('addMessage', receiveMsg);
                 })
+            //error是连接失败的回调
             }, error => {
 
             })

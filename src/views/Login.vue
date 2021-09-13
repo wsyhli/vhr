@@ -55,7 +55,7 @@ export default {
           this.postKeyValueRequest('/doLogin',this.loginForm).then(resp=>{
             this.loading=false;
             if(resp){
-              this.$store.commit('INIT_CURRENTHR',resp.obj);
+              this.$store.commit('INIT_CURRENTHR',resp);
               //前端存储数据的地方:sessionStorage,localStorage,vuex
               //保存数据到sessionStorage
               window.sessionStorage.setItem("user",JSON.stringify(resp));

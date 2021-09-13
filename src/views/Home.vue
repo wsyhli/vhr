@@ -54,13 +54,16 @@ export default {
   data(){
     return{
       // 从 sessionStorage 获取数据
-      user:JSON.parse(window.sessionStorage.getItem("user")),
+      // user:JSON.parse(window.sessionStorage.getItem("user")),
       // src: 'http://bpic.588ku.com/element_pic/01/40/00/64573ce2edc0728.jpg'
     }
   },
   computed:{
     routes(){
       return this.$store.state.routes;
+    },
+    user(){
+      return this.$store.state.currentHr;
     }
   },
   methods:{
