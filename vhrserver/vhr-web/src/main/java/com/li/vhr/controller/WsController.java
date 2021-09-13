@@ -26,5 +26,4 @@ public class WsController {
         simpMessagingTemplate.convertAndSendToUser(chatMsg.getTo(), "/queue/chat", chatMsg);
     }
 
-
 }

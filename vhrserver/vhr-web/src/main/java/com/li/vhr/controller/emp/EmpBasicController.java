@@ -106,7 +106,8 @@ public class EmpBasicController {
     //数据导出接口
     @GetMapping("/export")
     public ResponseEntity<byte[]> exportData(){
-        List<Employee> list = (List<Employee>) employeeService.getEmployeeByPage(null, null, new Employee(),null).getData();
+        List<Employee> list =
+                (List<Employee>) employeeService.getEmployeeByPage(null, null, new Employee(),null).getData();
         return POIUtils.employee2Excel(list);
     }
 

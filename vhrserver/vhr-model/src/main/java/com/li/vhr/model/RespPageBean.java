@@ -3,7 +3,6 @@ package com.li.vhr.model;
 import java.util.List;
 
 
-
 //把分页查询的结果封装成一个模块
 public class RespPageBean {
 
